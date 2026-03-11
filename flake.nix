@@ -40,6 +40,16 @@
                 typescript-language-server
                 vscode-langservers-extracted
                 yaml-language-server
+
+                # Formatters
+                gotools
+                nixfmt
+                nodePackages.prettier
+                ruff
+                rustfmt
+                shfmt
+                taplo
+                stylua
             ];
         };
     };
