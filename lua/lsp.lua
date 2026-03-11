@@ -21,6 +21,7 @@ vim.keymap.set("n", "gD", vim.lsp.buf.declaration)
 vim.keymap.set("n", "ge", vim.diagnostic.open_float)
 vim.keymap.set("n", "gee", vim.diagnostic.setqflist)
 vim.keymap.set("n", "gE", vim.lsp.buf.code_action)
+vim.keymap.set({ "n", "v" }, "gq", vim.lsp.buf.format)
 
 -- Enable language servers
 vim.lsp.enable({
