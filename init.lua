@@ -14,6 +14,7 @@ require("plugins.fzf-lua")
 require("plugins.treesitter")
 require("plugins.vim-tmux-navigator")
 require("plugins.visual-whitespace")
+require("plugins.conform")
 
 -- Defaults
 require("options")
