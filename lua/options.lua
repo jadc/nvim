@@ -30,6 +30,7 @@ local opts = {
 
     --- Miscellaneous
     clipboard = "unnamedplus",  -- Use system clipboard
+    updatetime = 250,           -- Faster CursorHold for LSP highlights
 }
 
 for k, v in pairs(opts) do
