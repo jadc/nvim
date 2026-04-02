@@ -57,7 +57,7 @@ return {
         "--enable-config",
         "--header-insertion=never",
         "--limit-results=0",
-        "--log=verbose",
+        "--log=error",
         "--pch-storage=memory",
     },
     filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
