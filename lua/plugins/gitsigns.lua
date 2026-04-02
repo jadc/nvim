@@ -4,7 +4,6 @@ vim.opt.signcolumn = "yes"
 require("gitsigns").setup({
     numhl = true,
     signcolumn = true,
-    current_line_blame = true,
 
     on_attach = function(bufnr)
         local gitsigns = require("gitsigns")
@@ -33,6 +32,7 @@ require("gitsigns").setup({
         end)
 
         -- Actions
+        map("n", "<leader>hb", gitsigns.blame_line)
         map("n", "<leader>hh", gitsigns.preview_hunk_inline)
 
         map("n", "<leader>hs", gitsigns.stage_hunk)
