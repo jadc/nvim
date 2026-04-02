@@ -1,10 +1,8 @@
 vim.pack.add({
     "https://github.com/hrsh7th/nvim-cmp",
-    "https://github.com/neovim/nvim-lspconfig",
     "https://github.com/hrsh7th/cmp-buffer",
     "https://github.com/hrsh7th/cmp-nvim-lsp",
     "https://github.com/hrsh7th/cmp-path",
-    "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
     "https://github.com/onsails/lspkind.nvim",
     "https://github.com/L3MON4D3/LuaSnip",
     "https://github.com/rafamadriz/friendly-snippets",
