@@ -11,7 +11,9 @@ require("plugins.lualine")
 require("plugins.scope")
 require("plugins.fzf-lua")
 require("plugins.treesitter")
-require("plugins.vim-tmux-navigator")
+if vim.env.TMUX then
+    require("plugins.vim-tmux-navigator")
+end
 require("plugins.visual-whitespace")
 require("plugins.conform")
 
