@@ -23,6 +23,7 @@ hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
     vim.api.nvim_set_hl(0, "RainbowGreen",  { fg = "#98C379" })
     vim.api.nvim_set_hl(0, "RainbowViolet", { fg = "#C678DD" })
     vim.api.nvim_set_hl(0, "RainbowCyan",   { fg = "#56B6C2" })
+    vim.api.nvim_set_hl(0, "IblScopeChar", { link = "LspInlayHint" })
 end)
 
 -- rainbow-delimiters config
@@ -36,7 +37,7 @@ require("ibl").setup({
         char = "▏",
     },
     scope = {
-        highlight = highlight,
+        highlight = { "IblScopeChar" },
         show_start = false,
         show_end = false,
     },
@@ -45,4 +46,3 @@ require("ibl").setup({
     },
 })
 
-hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
