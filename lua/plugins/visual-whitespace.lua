@@ -8,7 +8,7 @@ require("visual-whitespace").setup({
 
 -- Highlight trailing whitespace
 vim.opt.list = true
-vim.opt.listchars:append({ trail = "·" })
+vim.opt.listchars:append({ trail = "·", tab = "▏ " })
 
 -- Highlight whitespace-only lines
 vim.api.nvim_set_hl(0, "WhitespaceOnlyLine", { link = "Visual" })
