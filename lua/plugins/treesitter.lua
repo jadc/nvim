@@ -5,6 +5,11 @@ vim.pack.add({
 vim.api.nvim_create_autocmd("FileType", {
     pattern = { "*" },
     callback = function(args)
+        -- Skip large files to avoid freezing
+        local max_filesize = 256 * 1024 -- 256 KB
+        local ok, stats = pcall(vim.uv.fs_stat, vim.api.nvim_buf_get_name(args.buf))
+        if ok and stats and stats.size > max_filesize then return end
+
         local ft = vim.bo[args.buf].filetype
         local lang = vim.treesitter.language.get_lang(ft)
 
