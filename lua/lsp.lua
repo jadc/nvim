@@ -11,6 +11,9 @@ vim.diagnostic.config({
     severity_sort = true,      -- Show errors over warnings
 })
 
+-- Enable inlay hints
+vim.lsp.inlay_hint.enable(true)
+
 -- Disable logging to ~/.local/state/nvim/lsp.log
 vim.lsp.log.set_level("off")
 
