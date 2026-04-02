@@ -17,9 +17,6 @@ vim.lsp.inlay_hint.enable(true)
 -- Disable logging to ~/.local/state/nvim/lsp.log
 vim.lsp.log.set_level("off")
 
--- Customize hover window appearance
-vim.opt.winborder = "rounded"
-
 vim.keymap.set("n", "gD", vim.lsp.buf.declaration)
 vim.keymap.set("n", "ge", vim.diagnostic.open_float)
 vim.keymap.set("n", "gee", vim.diagnostic.setqflist)

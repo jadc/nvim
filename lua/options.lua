@@ -30,6 +30,7 @@ local opts = {
 
     --- Miscellaneous
     clipboard = "unnamedplus",  -- Use system clipboard
+    winborder = "rounded",      -- Rounded window borders
     updatetime = 250,           -- Faster CursorHold for LSP highlights
 }
 
