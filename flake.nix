@@ -44,7 +44,7 @@
                 # Formatters
                 gotools
                 nixfmt
-                nodePackages.prettier
+                prettier
                 ruff
                 rustfmt
                 shfmt
