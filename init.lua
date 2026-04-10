@@ -14,6 +14,7 @@ require("plugins.treesitter")
 if vim.env.TMUX then
     require("plugins.vim-tmux-navigator")
 end
+require("plugins.mini-cursorword")
 require("plugins.visual-whitespace")
 require("plugins.conform")
 
