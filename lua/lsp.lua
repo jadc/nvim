@@ -3,8 +3,8 @@ vim.pack.add({ "https://github.com/neovim/nvim-lspconfig" })
 
 -- Setup styling of error virtual text
 vim.diagnostic.config({
-    virtual_text = false,
-    virtual_lines = { current_line = true },
+    virtual_text = false,      -- Disable in-line errors
+    virtual_lines = true,      -- Enable errors on separate line
     underline = true,
     signs = true,
     update_in_insert = false,  -- Only update errors in normal mode
