@@ -42,7 +42,7 @@
                 yaml-language-server
 
                 # Formatters
-                gotools
+                (lib.lowPrio gotools)
                 nixfmt
                 prettier
                 ruff
