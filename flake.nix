@@ -1,14 +1,6 @@
 {
     outputs = { ... }: {
         homeManagerModules.default = { lib, pkgs, ... }: {
-            programs.neovim = {
-                enable = true;
-                defaultEditor = true;
-                viAlias = true;
-                vimAlias = true;
-                vimdiffAlias = true;
-            };
-
             # Clone nvim config if it doesn't exist
             home.activation.cloneNvimConfig = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
                 if [ ! -d "$HOME/.config/nvim" ]; then
@@ -16,40 +8,49 @@
                 fi
             '';
 
+	    # Configure environment and aliases
+            home.sessionVariables.EDITOR = "nvim";
+            home.shellAliases = {
+                vi = "nvim";
+                vim = "nvim";
+                vimdiff = "nvim -d";
+            };
+
             # Install all required packages
-            home.packages = with pkgs; [
-                fd
-                fzf
-                gcc
-                gnumake
-                ripgrep
-                tree-sitter
-                wl-clipboard
-                xclip
+            home.packages = [
+                pkgs.neovim
+                pkgs.fd
+                pkgs.fzf
+                pkgs.gcc
+                pkgs.gnumake
+                pkgs.ripgrep
+                pkgs.tree-sitter
+                pkgs.wl-clipboard
+                pkgs.xclip
 
                 # Language Servers
-                bash-language-server
-                clang-tools
-                clippy
-                gopls
-                lua-language-server
-                nixd
-                pyright
-                rust-analyzer
-                svelte-language-server
-                typescript-language-server
-                vscode-langservers-extracted
-                yaml-language-server
+                pkgs.bash-language-server
+                pkgs.clang-tools
+                pkgs.clippy
+                pkgs.gopls
+                pkgs.lua-language-server
+                pkgs.nixd
+                pkgs.pyright
+                pkgs.rust-analyzer
+                pkgs.svelte-language-server
+                pkgs.typescript-language-server
+                pkgs.vscode-langservers-extracted
+                pkgs.yaml-language-server
 
                 # Formatters
-                (lib.lowPrio gotools)
-                nixfmt
-                prettier
-                ruff
-                rustfmt
-                shfmt
-                taplo
-                stylua
+                (lib.lowPrio pkgs.gotools)
+                pkgs.nixfmt
+                pkgs.prettier
+                pkgs.ruff
+                pkgs.rustfmt
+                pkgs.shfmt
+                pkgs.taplo
+                pkgs.stylua
             ];
         };
     };
