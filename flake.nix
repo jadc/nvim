@@ -1,14 +1,16 @@
 {
     outputs = { ... }: {
         homeManagerModules.default = { lib, pkgs, ... }: {
-            # Clone nvim config if it doesn't exist
+            # Keep neovim config clone up to date on every switch
             home.activation.cloneNvimConfig = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
                 if [ ! -d "$HOME/.config/nvim" ]; then
                     ${pkgs.git}/bin/git clone https://github.com/jadc/nvim "$HOME/.config/nvim"
+                else
+                    ${pkgs.git}/bin/git -C "$HOME/.config/nvim" pull --ff-only
                 fi
             '';
 
-	    # Configure environment and aliases
+            # Configure environment and aliases
             home.sessionVariables.EDITOR = "nvim";
             home.shellAliases = {
                 vi = "nvim";
