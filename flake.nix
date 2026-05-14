@@ -1,7 +1,17 @@
 {
     outputs = { self, ... }: {
         homeManagerModules.default = { lib, pkgs, ... }: {
-            xdg.configFile."nvim".source = self;
+            xdg.configFile = {
+                "nvim/init.lua".source = "${self}/init.lua";
+                "nvim/lua".source = "${self}/lua";
+                "nvim/after".source = "${self}/after";
+            };
+
+            home.activation.syncNvimPackLock = lib.hm.dag.entryAfter ["writeBoundary"] ''
+                $DRY_RUN_CMD install -Dm644 \
+                    "${self}/nvim-pack-lock.json" \
+                    "''${XDG_CONFIG_HOME:-$HOME/.config}/nvim/nvim-pack-lock.json"
+            '';
 
             # Configure environment and aliases
             home.sessionVariables.EDITOR = "nvim";
