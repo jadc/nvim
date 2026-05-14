@@ -5,6 +5,9 @@ on:
     - cron: "0 0 * * 0"
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   update:
     runs-on: ubuntu-latest
@@ -15,7 +18,7 @@ jobs:
         with:
           neovim: true
 
-      - run: nvim --headless -c "lua vim.pack.update()" -c "qa"
+      - run: XDG_CONFIG_HOME="${GITHUB_WORKSPACE%/*}" nvim --headless -c "lua vim.pack.update(nil, { force = true })" -c "qa"
 
       - run: |
           git config user.name "github-actions[bot]"
