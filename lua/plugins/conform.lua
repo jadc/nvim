@@ -6,6 +6,7 @@ require("conform").setup({
         bash = { "shfmt" },
         c = { "clang-format" },
         cpp = { "clang-format" },
+        cs = { "csharpier" },
         css = { "prettier" },
         go = { "gofmt", "goimports" },
         html = { "prettier" },
