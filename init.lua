@@ -17,6 +17,7 @@ end
 require("plugins.mini-cursorword")
 require("plugins.visual-whitespace")
 require("plugins.conform")
+require("plugins.roslyn")
 
 -- Defaults
 require("options")
