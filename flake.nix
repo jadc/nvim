@@ -30,6 +30,7 @@
                 pkgs.gnumake
                 pkgs.ripgrep
                 pkgs.tree-sitter
+                pkgs.dotnet-sdk
                 pkgs.wl-clipboard
                 pkgs.xclip
 
@@ -46,8 +47,10 @@
                 pkgs.typescript-language-server
                 pkgs.vscode-langservers-extracted
                 pkgs.yaml-language-server
+                pkgs.roslyn-ls
 
                 # Formatters
+                pkgs.csharpier
                 (lib.lowPrio pkgs.gotools)
                 pkgs.nixfmt
                 pkgs.prettier
