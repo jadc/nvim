@@ -8,6 +8,10 @@ _onedark.setup({
         bg1 = "#000000",
         fg  = "#dde0e5",
     },
+    code_style = {
+        keywords = "italic",
+        comments = "italic",
+    },
 })
 _onedark.load()
 vim.api.nvim_set_hl(0, "ColorColumn", { bg = "#080808" })
