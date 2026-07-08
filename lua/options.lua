@@ -3,7 +3,7 @@ local opts = {
     --- Disable backups
     backup = false,
     swapfile = false,
-    undofile = false,
+    undofile = true,
     writebackup = false,
 
     --- Tabs, Wrapping, and Spacing
