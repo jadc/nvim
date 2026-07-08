@@ -15,6 +15,7 @@ if vim.env.TMUX then
     require("plugins.vim-tmux-navigator")
 end
 require("plugins.mini-cursorword")
+require("plugins.mini-files")
 require("plugins.visual-whitespace")
 require("plugins.conform")
 require("plugins.roslyn")
