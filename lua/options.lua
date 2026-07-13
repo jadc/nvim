@@ -9,11 +9,7 @@ local opts = {
     --- Tabs, Wrapping, and Spacing
     breakindent = true,  -- Maintain indent when wrapping
     colorcolumn = "80",  -- Column width marker
-    expandtab = true,    -- Tabs as spaces
     linebreak = true,    -- Don't cut words while wrapping
-    shiftwidth = 4,
-    softtabstop = 4,
-    tabstop = 4,         -- Tab size
 
     --- Visibility
     cmdheight = 0,   -- Hide command line
