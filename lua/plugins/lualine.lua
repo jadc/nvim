@@ -9,8 +9,28 @@ local _icons = {
     added = " ",
     removed = " ",
     lock = "",
-    modified = "●"
+    modified = "●",
+    search = " "
 }
+
+local function search_count()
+    if vim.v.hlsearch == 0 then
+        return ""
+    end
+
+    local ok, count = pcall(vim.fn.searchcount, {
+        recompute = true,
+        maxcount = 999,
+        timeout = 50,
+    })
+
+    if not ok or count.total == 0 then
+        return ""
+    end
+
+    local total = count.incomplete == 2 and ">" .. count.maxcount or count.total
+    return string.format("%s%d/%s", _icons.search, count.current, total)
+end
 
 require("lualine").setup({
     options = {
@@ -37,6 +57,7 @@ require("lualine").setup({
         },
         lualine_c = {},
         lualine_x = {
+            search_count,
             {
                 "diagnostics",
                 sources = { "nvim_diagnostic" },
