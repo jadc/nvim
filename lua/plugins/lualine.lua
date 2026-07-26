@@ -57,7 +57,6 @@ require("lualine").setup({
         },
         lualine_c = {},
         lualine_x = {
-            search_count,
             {
                 "diagnostics",
                 sources = { "nvim_diagnostic" },
@@ -74,10 +73,12 @@ require("lualine").setup({
                     hint =  { fg = "#88aaaa" }
                 }
             },
-            "lsp_status",
             "branch",
         },
-        lualine_y = {"progress"},
+        lualine_y = {
+            search_count,
+            "progress"
+        },
         lualine_z = {},
     },
 })

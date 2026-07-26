@@ -19,6 +19,7 @@ require("plugins.visual-whitespace")
 require("plugins.conform")
 require("plugins.guess-indent")
 require("plugins.roslyn")
+require("plugins.fidget")
 
 -- Defaults
 require("options")
