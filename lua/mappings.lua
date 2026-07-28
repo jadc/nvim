@@ -56,6 +56,20 @@ local mappings = {
         options = { noremap = true, silent = true },
     },
 
+    -- Jumplist navigation
+    {
+        key = ",",
+        action = "<C-o>",
+        mode = { "n" },
+        options = { noremap = true, silent = true, desc = "Jump back" },
+    },
+    {
+        key = ".",
+        action = "<C-i>",
+        mode = { "n" },
+        options = { noremap = true, silent = true, desc = "Jump forward" },
+    },
+
     -- Buffer navigation
     {
         key = "<Tab>",
