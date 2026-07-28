@@ -1,5 +1,8 @@
 vim.pack.add({ "https://github.com/nvim-lualine/lualine.nvim" })
 
+-- Don't print mode, lualine handles it
+vim.o.showmode = false
+
 local _icons = {
     git_branch = "",
     error = " ",
@@ -32,11 +35,26 @@ local function search_count()
     return string.format("%s%d/%s", _icons.search, count.current, total)
 end
 
+local theme = require("lualine.themes.auto")
+
+-- Transparent bar background
+local TRANSPARENT = "NONE"
+theme.normal.c.bg = TRANSPARENT
+theme.inactive.a.bg = TRANSPARENT
+theme.inactive.b.bg = TRANSPARENT
+theme.inactive.c.bg = TRANSPARENT
+vim.api.nvim_set_hl(0, "StatusLine", { bg = TRANSPARENT })
+vim.api.nvim_set_hl(0, "StatusLineNC", { bg = TRANSPARENT })
+vim.api.nvim_set_hl(0, "StatusLineTerm", { bg = TRANSPARENT })
+vim.api.nvim_set_hl(0, "StatusLineTermNC", { bg = TRANSPARENT })
+
 require("lualine").setup({
     options = {
+        theme = theme,
         section_separators   = { left = '', right = '' },
         component_separators = { left = '', right = '' },
         always_show_tabline = false,
+        globalstatus = true,  -- One statusline for whole screen
     },
     sections = {
         lualine_a = {"mode"},
