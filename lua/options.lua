@@ -8,14 +8,11 @@ local opts = {
 
     --- Tabs, Wrapping, and Spacing
     breakindent = true,  -- Maintain indent when wrapping
-    colorcolumn = "80",  -- Column width marker
     linebreak = true,    -- Don't cut words while wrapping
 
     --- Visibility
-    cmdheight = 0,   -- Hide command line
-    --laststatus = 0,  -- Hide status line
-    number = true,   -- Show line numbers
-
+    cmdheight = 0,    -- Hide command line
+    number = true,    -- Show line numbers
     --- Folding
     foldlevel = 20,
 

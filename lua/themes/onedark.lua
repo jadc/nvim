@@ -3,6 +3,7 @@ vim.pack.add({ "https://github.com/navarasu/onedark.nvim" })
 local _onedark = require("onedark")
 _onedark.setup({
     style = "deep",
+    transparent = true,
     colors = {
         bg0 = "#000000",
         bg1 = "#000000",
@@ -14,7 +15,6 @@ _onedark.setup({
     },
 })
 _onedark.load()
-vim.api.nvim_set_hl(0, "ColorColumn", { bg = "#080808" })
 
 -- Requires visual-whitespace-nvim
 vim.api.nvim_set_hl(0, "VisualNonText", { fg = "#5d5f71", bg = "#2a324a"})
