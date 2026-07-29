@@ -89,7 +89,7 @@ return {
             switch_source_header(bufnr, client)
         end, { desc = "Switch between source/header" })
 
-        vim.keymap.set("n", "gh", function()
+        vim.keymap.set("n", "grh", function()
             switch_source_header(bufnr, client)
         end, { buffer = bufnr, desc = "Switch between source/header" })
 
