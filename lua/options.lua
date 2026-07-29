@@ -25,6 +25,7 @@ local opts = {
     clipboard = "unnamedplus",  -- Use system clipboard
     winborder = "rounded",      -- Rounded window borders
     updatetime = 250,           -- Faster CursorHold for LSP highlights
+    timeoutlen = 300,           -- Faster mapping-sequence timeout
 }
 
 for k, v in pairs(opts) do

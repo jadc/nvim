@@ -38,8 +38,8 @@ vim.lsp.enable({
 -- Keybindings
 local ok, fzf = pcall(require, "fzf-lua")
 
--- Unbind Neovim's default gr* LSP mappings
-for _, lhs in ipairs({ "grn", "gra", "gri", "grr", "grt" }) do
+-- Unbind Neovim's default gr* LSP mappings (global, set at startup)
+for _, lhs in ipairs({ "grn", "gra", "gri", "grr", "grt", "grx" }) do
     pcall(vim.keymap.del, "n", lhs)
 end
 
