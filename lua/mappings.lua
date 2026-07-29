@@ -1,28 +1,28 @@
 local mappings = {
-    -- Allow movement through wrapped lines
+    -- Allow movement through wrapped lines, but only when no count is given
     {
         key = "j",
-        action = "gj",
+        action = function() return vim.v.count > 0 and "j" or "gj" end,
         mode = { "n", "x" },
-        options = { noremap = true, silent = true },
+        options = { expr = true, silent = true },
     },
     {
         key = "k",
-        action = "gk",
+        action = function() return vim.v.count > 0 and "k" or "gk" end,
         mode = { "n", "x" },
-        options = { noremap = true, silent = true },
+        options = { expr = true, silent = true },
     },
     {
         key = "$",
         action = "g$",
         mode = { "n", "x" },
-        options = { noremap = true, silent = true },
+        options = { silent = true },
     },
     {
         key = "0",
         action = "g0",
         mode = { "n", "x" },
-        options = { noremap = true, silent = true },
+        options = { silent = true },
     },
 
     -- Maintain selection after indent
@@ -30,13 +30,13 @@ local mappings = {
         key = "<",
         action = "<gv",
         mode = { "v" },
-        options = { noremap = true, silent = true },
+        options = { silent = true },
     },
     {
         key = ">",
         action = ">gv",
         mode = { "v" },
-        options = { noremap = true, silent = true },
+        options = { silent = true },
     },
 
     -- Center search query to middle of buffer
@@ -44,13 +44,13 @@ local mappings = {
         key = "n",
         action = "nzzzv",
         mode = { "n" },
-        options = { noremap = true, silent = true },
+        options = { silent = true },
     },
     {
         key = "N",
         action = "Nzzzv",
         mode = { "n" },
-        options = { noremap = true, silent = true },
+        options = { silent = true },
     },
 
     -- Jumplist navigation
@@ -58,13 +58,13 @@ local mappings = {
         key = ",",
         action = "<C-o>",
         mode = { "n" },
-        options = { noremap = true, silent = true, desc = "Jump back" },
+        options = { silent = true, desc = "Jump back" },
     },
     {
         key = ".",
         action = "<C-i>",
         mode = { "n" },
-        options = { noremap = true, silent = true, desc = "Jump forward" },
+        options = { silent = true, desc = "Jump forward" },
     },
 
     -- Buffer navigation
@@ -72,26 +72,26 @@ local mappings = {
         key = "<Tab>",
         action = "<cmd>bnext<CR>",
         mode = { "n" },
-        options = { noremap = true, silent = true, desc = "Next buffer" },
+        options = { silent = true, desc = "Next buffer" },
     },
     {
         key = "<S-Tab>",
         action = "<cmd>bprevious<CR>",
         mode = { "n" },
-        options = { noremap = true, silent = true, desc = "Previous buffer" },
+        options = { silent = true, desc = "Previous buffer" },
     },
     -- Buffer management
     {
         key = "<c-w>",
         action = "<cmd>bdelete<CR>",
         mode = { "n" },
-        options = { noremap = true, silent = true, nowait = true, desc = "Close buffer" },
+        options = { silent = true, nowait = true, desc = "Close buffer" },
     },
     {
         key = "<c-x>",
         action = "<cmd>silent! %bdelete|edit#|silent! bdelete#<CR>",
         mode = { "n" },
-        options = { noremap = true, silent = true, nowait = true, desc = "Close other buffers" },
+        options = { silent = true, nowait = true, desc = "Close other buffers" },
     },
 }
 
@@ -107,5 +107,5 @@ local disabled = {
     "<Right>"
 }
 for _, key in ipairs(disabled) do
-    vim.keymap.set({ "n", "x", "i" }, key, "<Nop>", { noremap = true, silent = true })
+    vim.keymap.set({ "n", "x", "i" }, key, "<Nop>", { silent = true })
 end
