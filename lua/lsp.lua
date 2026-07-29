@@ -34,3 +34,20 @@ vim.lsp.enable({
     "ts_ls",
     "yamlls",
 })
+
+-- Keybindings
+local ok, fzf = pcall(require, "fzf-lua")
+
+-- Unbind Neovim's default gr* LSP mappings
+for _, lhs in ipairs({ "grn", "gra", "gri", "grr", "grt" }) do
+    pcall(vim.keymap.del, "n", lhs)
+end
+
+vim.keymap.set("n", "gd", ok and fzf.lsp_definitions or vim.lsp.buf.definition)
+vim.keymap.set("n", "ga", ok and fzf.lsp_code_actions or vim.lsp.buf.code_action)
+vim.keymap.set("n", "gi", ok and fzf.lsp_implementations or vim.lsp.buf.implementation)
+vim.keymap.set("n", "gr", ok and fzf.lsp_references or vim.lsp.buf.references)
+vim.keymap.set("n", "gt", ok and fzf.lsp_typedefs or vim.lsp.buf.type_definition)
+vim.keymap.set("n", "gD", vim.lsp.buf.declaration)
+vim.keymap.set("n", "ge", vim.diagnostic.open_float)
+vim.keymap.set("n", "gE", vim.diagnostic.setqflist)

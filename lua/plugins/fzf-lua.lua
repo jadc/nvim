@@ -36,16 +36,10 @@ require("fzf-lua").setup({
 -- Keybindings
 local fzf = require("fzf-lua")
 
-vim.keymap.set({ "n", "x" }, "<leader>f", fzf.live_grep, { noremap = true, silent = true })
-vim.keymap.set({ "n", "x" }, "<leader>p", fzf.files, { noremap = true, silent = true })
-vim.keymap.set("n", "<leader><leader>", fzf.buffers, { noremap = true, silent = true, desc = "Buffers" })
+local function map(lhs, rhs)
+    vim.keymap.set("n", "<leader>" .. lhs, rhs)
+end
 
--- LSP keybindings
-vim.keymap.set("n", "grd", fzf.lsp_definitions)
-vim.keymap.set("n", "gra", fzf.lsp_code_actions)
-vim.keymap.set("n", "gri", fzf.lsp_implementations)
-vim.keymap.set("n", "grr", fzf.lsp_references)
-vim.keymap.set("n", "grt", fzf.lsp_typedefs)
-vim.keymap.set("n", "grD", vim.lsp.buf.declaration)
-vim.keymap.set("n", "gre", vim.diagnostic.open_float)
-vim.keymap.set("n", "grE", vim.diagnostic.setqflist)
+map("f", fzf.live_grep)
+map("p", fzf.files)
+map("<leader>", fzf.buffers)
