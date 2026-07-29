@@ -4,25 +4,23 @@ local mappings = {
         key = "j",
         action = function() return vim.v.count > 0 and "j" or "gj" end,
         mode = { "n", "x" },
-        options = { expr = true, silent = true },
+        options = { expr = true },
     },
     {
         key = "k",
         action = function() return vim.v.count > 0 and "k" or "gk" end,
         mode = { "n", "x" },
-        options = { expr = true, silent = true },
+        options = { expr = true },
     },
     {
         key = "$",
         action = "g$",
         mode = { "n", "x" },
-        options = { silent = true },
     },
     {
         key = "0",
         action = "g0",
         mode = { "n", "x" },
-        options = { silent = true },
     },
 
     -- Maintain selection after indent
@@ -30,13 +28,11 @@ local mappings = {
         key = "<",
         action = "<gv",
         mode = { "v" },
-        options = { silent = true },
     },
     {
         key = ">",
         action = ">gv",
         mode = { "v" },
-        options = { silent = true },
     },
 
     -- Center search query to middle of buffer
@@ -44,13 +40,11 @@ local mappings = {
         key = "n",
         action = "nzzzv",
         mode = { "n" },
-        options = { silent = true },
     },
     {
         key = "N",
         action = "Nzzzv",
         mode = { "n" },
-        options = { silent = true },
     },
 
     -- Jumplist navigation
@@ -58,13 +52,13 @@ local mappings = {
         key = ",",
         action = "<C-o>",
         mode = { "n" },
-        options = { silent = true, desc = "Jump back" },
+        options = { desc = "Jump back" },
     },
     {
         key = ".",
         action = "<C-i>",
         mode = { "n" },
-        options = { silent = true, desc = "Jump forward" },
+        options = { desc = "Jump forward" },
     },
 }
 
@@ -80,5 +74,5 @@ local disabled = {
     "<Right>"
 }
 for _, key in ipairs(disabled) do
-    vim.keymap.set({ "n", "x", "i" }, key, "<Nop>", { silent = true })
+    vim.keymap.set({ "n", "x", "i" }, key, "<Nop>")
 end
