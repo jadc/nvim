@@ -1,6 +1,3 @@
--- Set leader key
-vim.g.mapleader = " "
-
 local mappings = {
     -- Allow movement through wrapped lines
     {
@@ -83,13 +80,6 @@ local mappings = {
         mode = { "n" },
         options = { noremap = true, silent = true, desc = "Previous buffer" },
     },
-    {
-        key = "<leader><leader>",
-        action = "<C-^>",
-        mode = { "n" },
-        options = { noremap = true, silent = true, desc = "Alternate buffer" },
-    },
-
     -- Buffer management
     {
         key = "<c-w>",
@@ -104,12 +94,6 @@ local mappings = {
         options = { noremap = true, silent = true, nowait = true, desc = "Close other buffers" },
     },
 }
-
--- Numeric buffer jumps (<leader>1-9)
-for i = 1, 9 do
-    vim.keymap.set("n", "<leader>" .. i, "<cmd>LualineBuffersJump! " .. i .. "<CR>",
-        { noremap = true, silent = true, desc = "Go to buffer " .. i })
-end
 
 for _, map in ipairs(mappings) do
     vim.keymap.set(map.mode, map.key, map.action, map.options)
