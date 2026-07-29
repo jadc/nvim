@@ -17,11 +17,6 @@ vim.lsp.inlay_hint.enable(true)
 -- Disable logging to ~/.local/state/nvim/lsp.log
 vim.lsp.log.set_level("off")
 
-vim.keymap.set("n", "gD", vim.lsp.buf.declaration)
-vim.keymap.set("n", "ge", vim.diagnostic.open_float)
-vim.keymap.set("n", "gee", vim.diagnostic.setqflist)
-vim.keymap.set("n", "gf", function() vim.lsp.buf.code_action({ apply = true }) end)
-
 -- Enable language servers
 vim.lsp.enable({
     "bashls",
