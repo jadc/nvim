@@ -4,6 +4,10 @@ vim.opt.signcolumn = "yes"
 require("gitsigns").setup({
     numhl = true,
     signcolumn = true,
+    current_line_blame = true,
+    current_line_blame_opts = {
+        virt_text = false,
+    },
 
     on_attach = function(bufnr)
         local gitsigns = require("gitsigns")

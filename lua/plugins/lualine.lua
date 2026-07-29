@@ -4,12 +4,14 @@ vim.pack.add({ "https://github.com/nvim-lualine/lualine.nvim" })
 vim.o.showmode = false
 
 local _icons = {
+    added = " ",
+    branch = "",
     error = " ",
-    git_branch = "",
     hint = " ",
     info = " ",
     lock = "",
-    modified = "●",
+    modified = "● ",
+    removed = " ",
     search = " ",
     warn = " ",
 }
@@ -56,16 +58,26 @@ require("lualine").setup({
     },
     sections = {
         lualine_a = {"mode"},
-        lualine_b = {},
+        lualine_b = {
+            {
+                "branch",
+                icon = _icons.branch,
+            },
+            {
+                "diff",
+                symbols = {
+                    added = _icons.added,
+                    modified = _icons.modified,
+                    removed = _icons.removed,
+                },
+            },
+        },
         lualine_c = {
             {
-                "filename",
-                path = 4, -- filename and immediate parent
-                symbols = {
-                    modified = "" .. _icons.modified,
-                    readonly = "" .. _icons.lock,
-                    unnamed = "—",
-                },
+                function()
+                    return vim.b.gitsigns_blame_line or ""
+                end,
+                color = { fg = "#666666" },
             },
         },
         lualine_x = {
@@ -84,10 +96,6 @@ require("lualine").setup({
                     info =  { fg = "#445455" },
                     hint =  { fg = "#88aaaa" }
                 }
-            },
-            {
-                "branch",
-                icon = _icons.git_branch,
             },
         },
         lualine_y = {

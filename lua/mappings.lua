@@ -66,33 +66,6 @@ local mappings = {
         mode = { "n" },
         options = { silent = true, desc = "Jump forward" },
     },
-
-    -- Buffer navigation
-    {
-        key = "<Tab>",
-        action = "<cmd>bnext<CR>",
-        mode = { "n" },
-        options = { silent = true, desc = "Next buffer" },
-    },
-    {
-        key = "<S-Tab>",
-        action = "<cmd>bprevious<CR>",
-        mode = { "n" },
-        options = { silent = true, desc = "Previous buffer" },
-    },
-    -- Buffer management
-    {
-        key = "<c-w>",
-        action = "<cmd>bdelete<CR>",
-        mode = { "n" },
-        options = { silent = true, nowait = true, desc = "Close buffer" },
-    },
-    {
-        key = "<c-x>",
-        action = "<cmd>silent! %bdelete|edit#|silent! bdelete#<CR>",
-        mode = { "n" },
-        options = { silent = true, nowait = true, desc = "Close other buffers" },
-    },
 }
 
 for _, map in ipairs(mappings) do
