@@ -23,6 +23,10 @@ hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
     vim.api.nvim_set_hl(0, "RainbowGreen",  { fg = "#98C379" })
     vim.api.nvim_set_hl(0, "RainbowViolet", { fg = "#C678DD" })
     vim.api.nvim_set_hl(0, "RainbowCyan",   { fg = "#56B6C2" })
+
+    -- Match the `Whitespace` group so whitespace-only lines are visible
+    local ws = vim.api.nvim_get_hl(0, { name = "Whitespace" })
+    vim.api.nvim_set_hl(0, "IblWhitespace", { fg = ws.fg, nocombine = true })
 end)
 
 -- rainbow-delimiters config
