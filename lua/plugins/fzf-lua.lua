@@ -38,6 +38,7 @@ local fzf = require("fzf-lua")
 
 vim.keymap.set({ "n", "x" }, "<c-f>", fzf.live_grep, { noremap = true, silent = true })
 vim.keymap.set({ "n", "x" }, "<c-p>", fzf.files, { noremap = true, silent = true })
+vim.keymap.set("n", "<leader><leader>", fzf.buffers, { noremap = true, silent = true, desc = "Buffers" })
 
 -- LSP keybindings
 vim.keymap.set("n", "gd", fzf.lsp_definitions)

@@ -1,3 +1,5 @@
+vim.g.mapleader = " "
+
 -- Themes
 require("themes.onedark")
 
