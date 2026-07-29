@@ -3,31 +3,28 @@ vim.pack.add({
     "https://github.com/lukas-reineke/indent-blankline.nvim",
 })
 
-local highlight = {
-    "RainbowRed",
-    "RainbowYellow",
-    "RainbowBlue",
-    "RainbowOrange",
-    "RainbowGreen",
-    "RainbowViolet",
-    "RainbowCyan",
+local rainbow_colors = {
+    RainbowRed    = "#E06C75",
+    RainbowYellow = "#E5C07B",
+    RainbowBlue   = "#61AFEF",
+    RainbowOrange = "#D19A66",
+    RainbowGreen  = "#98C379",
+    RainbowViolet = "#C678DD",
+    RainbowCyan   = "#56B6C2",
 }
+
 local hooks = require "ibl.hooks"
--- create the highlight groups in the highlight setup hook, so they are reset
--- every time the colorscheme changes
 hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
-    vim.api.nvim_set_hl(0, "RainbowRed",    { fg = "#E06C75" })
-    vim.api.nvim_set_hl(0, "RainbowYellow", { fg = "#E5C07B" })
-    vim.api.nvim_set_hl(0, "RainbowBlue",   { fg = "#61AFEF" })
-    vim.api.nvim_set_hl(0, "RainbowOrange", { fg = "#D19A66" })
-    vim.api.nvim_set_hl(0, "RainbowGreen",  { fg = "#98C379" })
-    vim.api.nvim_set_hl(0, "RainbowViolet", { fg = "#C678DD" })
-    vim.api.nvim_set_hl(0, "RainbowCyan",   { fg = "#56B6C2" })
+    for name, color in pairs(rainbow_colors) do
+        vim.api.nvim_set_hl(0, name, { fg = color })
+    end
 
     -- Match the `Whitespace` group so whitespace-only lines are visible
     local ws = vim.api.nvim_get_hl(0, { name = "Whitespace" })
     vim.api.nvim_set_hl(0, "IblWhitespace", { fg = ws.fg, nocombine = true })
 end)
+
+local highlight = vim.tbl_keys(rainbow_colors)
 
 -- rainbow-delimiters config
 vim.g.rainbow_delimiters = {
@@ -37,9 +34,11 @@ vim.g.rainbow_delimiters = {
 -- indent-blankline config
 require("ibl").setup({
     indent = {
-        char = "▏",
+        -- Do not draw inactive indent guides
+        char = " ",
     },
     scope = {
+        char = "▏",
         highlight = highlight,
         show_start = false,
         show_end = false,
@@ -50,4 +49,3 @@ require("ibl").setup({
 })
 
 hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
-
