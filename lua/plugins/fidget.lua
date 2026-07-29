@@ -19,9 +19,12 @@ fidget.setup({
     },
 })
 
+local group = vim.api.nvim_create_augroup("FidgetNotify", { clear = true })
+
 -- Show macro recording status as toasts
 local macro_key = "macro-recording"
 vim.api.nvim_create_autocmd("RecordingEnter", {
+    group = group,
     callback = function()
         fidget.notify("Recording @" .. vim.fn.reg_recording(), vim.log.levels.INFO, {
             key = macro_key,
@@ -31,6 +34,7 @@ vim.api.nvim_create_autocmd("RecordingEnter", {
     end,
 })
 vim.api.nvim_create_autocmd("RecordingLeave", {
+    group = group,
     callback = function()
         -- Re-emit the same key with a short ttl so the toast fades out
         fidget.notify("Recorded @" .. vim.fn.reg_recording(), vim.log.levels.INFO, {
@@ -43,6 +47,7 @@ vim.api.nvim_create_autocmd("RecordingLeave", {
 
 -- Show vim.pack install/update/delete as toasts
 vim.api.nvim_create_autocmd("PackChanged", {
+    group = group,
     callback = function(ev)
         fidget.notify(ev.data.spec.name, vim.log.levels.INFO, {
             annote = "PACK " .. ev.data.kind,
@@ -52,6 +57,7 @@ vim.api.nvim_create_autocmd("PackChanged", {
 
 -- Show file save as toasts
 vim.api.nvim_create_autocmd("BufWritePost", {
+    group = group,
     callback = function(ev)
         local name = vim.fn.fnamemodify(ev.file, ":~:.")
         fidget.notify(name, vim.log.levels.INFO, { annote = "saved" })
@@ -60,6 +66,7 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 
 -- Show yanks as toasts
 vim.api.nvim_create_autocmd("TextYankPost", {
+    group = group,
     callback = function()
         local ev = vim.v.event
         if ev.operator ~= "y" then return end
