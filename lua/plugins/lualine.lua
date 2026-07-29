@@ -4,16 +4,14 @@ vim.pack.add({ "https://github.com/nvim-lualine/lualine.nvim" })
 vim.o.showmode = false
 
 local _icons = {
-    git_branch = "",
     error = " ",
-    warn = " ",
-    info = " ",
+    git_branch = "",
     hint = " ",
-    added = " ",
-    removed = " ",
+    info = " ",
     lock = "",
     modified = "●",
-    search = " "
+    search = " ",
+    warn = " ",
 }
 
 local function search_count()
@@ -58,22 +56,18 @@ require("lualine").setup({
     },
     sections = {
         lualine_a = {"mode"},
-        lualine_b = {
+        lualine_b = {},
+        lualine_c = {
             {
-                "buffers",
-                show_filename_only = true,
-                hide_filename_extension = false,
-                show_modified_status = true,
-                mode = 0, -- 0: name, 1: index, 2: name + index
+                "filename",
+                path = 4, -- filename and immediate parent
                 symbols = {
-                    modified = " " .. _icons.modified,
-                    alternate_file = "",
-                    directory = "",
+                    modified = "" .. _icons.modified,
+                    readonly = "" .. _icons.lock,
+                    unnamed = "—",
                 },
             },
-
         },
-        lualine_c = {},
         lualine_x = {
             {
                 "diagnostics",
@@ -91,7 +85,10 @@ require("lualine").setup({
                     hint =  { fg = "#88aaaa" }
                 }
             },
-            "branch",
+            {
+                "branch",
+                icon = _icons.git_branch,
+            },
         },
         lualine_y = {
             search_count,
