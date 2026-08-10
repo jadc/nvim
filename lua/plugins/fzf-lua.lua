@@ -5,7 +5,9 @@ vim.pack.add({
 
 vim.api.nvim_set_hl(0, "FzfLuaBorder", { fg = "#404040" })
 
-require("fzf-lua").setup({
+local fzf = require("fzf-lua")
+
+fzf.setup({
     winopts = {
         height = 0.95,
         width = 0.95,
@@ -33,9 +35,10 @@ require("fzf-lua").setup({
     },
 })
 
--- Keybindings
-local fzf = require("fzf-lua")
+-- Route vim.ui.select() through fzf-lua
+fzf.register_ui_select()
 
+-- Keybindings
 local function map(lhs, rhs)
     vim.keymap.set("n", "<leader>" .. lhs, rhs)
 end
