@@ -2,6 +2,8 @@ vim.pack.add({
     { src = "https://github.com/nvim-treesitter/nvim-treesitter", version = 'main' }
 })
 
+local file = require("utils.file")
+
 -- Cached list of parsers nvim-treesitter knows how to install
 local available
 
@@ -26,9 +28,7 @@ vim.api.nvim_create_autocmd("FileType", {
         local buf = args.buf
 
         -- Skip large files to avoid freezing
-        local max_filesize = 1024 * 1024 -- 1 MB
-        local ok, stats = pcall(vim.uv.fs_stat, vim.api.nvim_buf_get_name(buf))
-        if ok and stats and stats.size > max_filesize then return end
+        if file.is_large(buf) then return end
 
         local ft = vim.bo[buf].filetype
         local lang = vim.treesitter.language.get_lang(ft)

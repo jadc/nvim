@@ -1,5 +1,7 @@
 vim.pack.add({ "https://github.com/Bekaboo/dropbar.nvim" })
 
+local file = require("utils.file")
+
 require("dropbar").setup({
     bar = {
         enable = function(buf, win, _)
@@ -21,11 +23,6 @@ require("dropbar").setup({
                 return false
             end
 
-            local stat = vim.uv.fs_stat(vim.api.nvim_buf_get_name(buf))
-            if stat and stat.size > 1024 * 1024 then
-                return false
-            end
-
             return vim.bo[buf].buftype == ""
                 or vim.bo[buf].ft == "markdown"
                 or pcall(vim.treesitter.get_parser, buf)
@@ -33,6 +30,41 @@ require("dropbar").setup({
                     bufnr = buf,
                     method = "textDocument/documentSymbol",
                 }))
+        end,
+        sources = function(buf, _)
+            local sources = require("dropbar.sources")
+
+            -- Keep bar visible for large files, but avoid symbol
+            -- providers that can be expensive there.
+            if file.is_large(buf) then
+                return {
+                    sources.path,
+                }
+            end
+
+            -- Use dropbar's Markdown heading parser.
+            if vim.bo[buf].ft == "markdown" then
+                return {
+                    sources.path,
+                    sources.markdown,
+                }
+            end
+
+            if vim.bo[buf].buftype == "terminal" then
+                return {
+                    sources.terminal,
+                }
+            end
+
+            -- Prefer LSP symbols and treesitter context when available.
+            local utils = require("dropbar.utils")
+            return {
+                sources.path,
+                utils.source.fallback({
+                    sources.lsp,
+                    sources.treesitter,
+                }),
+            }
         end,
     },
 })
