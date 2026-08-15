@@ -23,6 +23,7 @@ local opts = {
 
     --- Miscellaneous
     clipboard = "unnamedplus",  -- Use system clipboard
+    autoread = true,            -- Reload unmodified files changed outside Neovim
     winborder = "rounded",      -- Rounded window borders
     updatetime = 250,           -- Faster CursorHold for LSP highlights
     timeoutlen = 300,           -- Faster mapping-sequence timeout

@@ -1,6 +1,18 @@
 local autocmd = vim.api.nvim_create_autocmd
 local augroup = vim.api.nvim_create_augroup
 
+-- Reload unchanged buffers after returning to Neovim or entering a buffer.
+-- Modified buffers are never reloaded, so unsaved edits remain safe.
+local checktime_group = augroup("Checktime", { clear = true })
+autocmd({ "FocusGained", "BufEnter", "TermLeave" }, {
+    group = checktime_group,
+    callback = function()
+        if vim.fn.mode() ~= "c" then
+            vim.cmd("checktime")
+        end
+    end,
+})
+
 -- Highlight yanked text
 local highlight_group = augroup("YankHighlight", { clear = true })
 autocmd("TextYankPost", {
