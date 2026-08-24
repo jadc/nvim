@@ -80,7 +80,9 @@ local mappings = {
                 vim.cmd("enew")
             end
 
-            vim.cmd("bdelete " .. buf)
+            if vim.api.nvim_buf_is_valid(buf) and vim.bo[buf].buflisted then
+                vim.cmd("bdelete " .. buf)
+            end
         end,
         mode = { "n" },
         options = { desc = "Close buffer" },

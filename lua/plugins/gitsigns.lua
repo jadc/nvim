@@ -36,9 +36,28 @@ require("gitsigns").setup({
         end)
 
         -- Actions
-        map("n", "<leader>hb", gitsigns.blame_line)
-        map("n", "<leader>hh", gitsigns.preview_hunk_inline)
 
+        -- Load the current line's history into the quickfix list.
+        local function line_history()
+            local line = vim.fn.line(".")
+            local ok, err = pcall(function()
+                vim.cmd(string.format("Gclog! -L %d,%d:%%", line, line))
+            end)
+            if not ok then
+                vim.notify(tostring(err), vim.log.levels.ERROR)
+                return
+            end
+
+            if vim.fn.getqflist({ size = 0 }).size == 0 then
+                vim.notify("No commits found for this line", vim.log.levels.WARN)
+                return
+            end
+
+            vim.cmd.copen()
+        end
+        map("n", "<leader>hb", line_history)
+
+        map("n", "<leader>hh", gitsigns.preview_hunk_inline)
         map("n", "<leader>hs", gitsigns.stage_hunk)
         map("v", "<leader>hs", function()
             gitsigns.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
