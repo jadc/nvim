@@ -22,3 +22,13 @@ autocmd("TextYankPost", {
     group = highlight_group,
 })
 
+-- Close the quickfix list with `q`
+local quickfix_group = augroup("Quickfix", { clear = true })
+autocmd("FileType", {
+    pattern = "qf",
+    group = quickfix_group,
+    callback = function(args)
+        vim.keymap.set("n", "q", "<C-w>c", { buffer = args.buf, desc = "Close quickfix" })
+    end,
+})
+

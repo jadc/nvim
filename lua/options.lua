@@ -11,8 +11,9 @@ local opts = {
     linebreak = true,    -- Don't cut words while wrapping
 
     --- Visibility
-    cmdheight = 0,    -- Hide command line
-    number = true,    -- Show line numbers
+    cmdheight = 0,              -- Hide command line
+    number = true,              -- Show line numbers
+    fillchars = { eob = " " },  -- Hide `~` past the end of the buffer
     --- Folding
     foldlevel = 20,
 
