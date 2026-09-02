@@ -101,10 +101,6 @@
       "rev": "3b753cf8c6a4dcde6edee8827d464ba9b8c4a6f0",
       "src": "https://github.com/tpope/vim-fugitive"
     },
-    "vim-tmux-navigator": {
-      "rev": "e41c431a0c7b7388ae7ba341f01a0d217eb3a432",
-      "src": "https://github.com/christoomey/vim-tmux-navigator"
-    },
     "visual-whitespace.nvim": {
       "rev": "d1f8889dd09ca9b07bc3b7af7cd5d1bfb5a7ea71",
       "src": "https://github.com/mcauley-penney/visual-whitespace.nvim"
