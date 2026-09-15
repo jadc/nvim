@@ -34,6 +34,33 @@ for k, v in pairs(opts) do
     vim.opt[k] = v
 end
 
+local file = require("utils.file")
+vim.api.nvim_create_autocmd("BufReadPost", {
+    group = vim.api.nvim_create_augroup("LargeFileOptions", { clear = true }),
+    callback = function(args)
+        if not file.is_large(args.buf) then
+            return
+        end
+
+        vim.bo[args.buf].filetype = ""
+        vim.bo[args.buf].syntax = ""
+        vim.bo[args.buf].swapfile = false
+        vim.bo[args.buf].undofile = false
+
+        for _, win in ipairs(vim.fn.win_findbuf(args.buf)) do
+            vim.wo[win].foldmethod = "manual"
+            vim.wo[win].foldenable = false
+            vim.wo[win].wrap = false
+            vim.wo[win].cursorline = false
+            vim.wo[win].relativenumber = false
+            vim.wo[win].list = false
+            vim.wo[win].colorcolumn = ""
+            vim.wo[win].signcolumn = "no"
+            vim.wo[win].spell = false
+        end
+    end,
+})
+
 -- Disable netrw
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
