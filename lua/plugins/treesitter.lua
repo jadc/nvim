@@ -13,7 +13,18 @@ local function start(buf, lang)
     if not vim.treesitter.language.add(lang) then return end
 
     vim.treesitter.start(buf, lang)
-    vim.bo[buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+
+    -- Use treesitter indent when available (and not C/C++, built-in is better for those).
+    local ft = vim.bo[buf].filetype
+    local use_treesitter_indent = vim.treesitter.query.get(lang, "indents") ~= nil
+    if use_treesitter_indent
+        and ft ~= "c"
+        and ft ~= "cpp"
+        and ft ~= "objc"
+        and ft ~= "objcpp"
+    then
+        vim.bo[buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+    end
 
     for _, win in ipairs(vim.fn.win_findbuf(buf)) do
         vim.wo[win][0].foldexpr = "v:lua.vim.treesitter.foldexpr()"
