@@ -1,4 +1,42 @@
+local function copy_location(visual)
+    local path = vim.fn.expand("%:.")
+    if path == "" then
+        vim.notify("Current buffer has no file path", vim.log.levels.WARN)
+        return
+    end
+
+    local first = vim.fn.line(".")
+    local location = path .. ":" .. first
+    if visual then
+        -- Use the active selection, not marks from the previous selection.
+        local anchor = vim.fn.line("v")
+        first, anchor = math.min(first, anchor), math.max(first, anchor)
+        location = path .. ":" .. first .. "-" .. anchor
+    end
+
+    vim.fn.setreg('"', location, "v")
+    if vim.fn.has("clipboard") == 1 then
+        vim.fn.setreg("+", location, "v")
+    end
+end
+
 local mappings = {
+    {
+        key = "Y",
+        action = function() copy_location(false) end,
+        mode = { "n" },
+        options = { desc = "Copy relative file path and line" },
+    },
+    {
+        key = "Y",
+        action = function()
+            copy_location(true)
+            vim.cmd.normal({ args = { "\27" }, bang = true })
+        end,
+        mode = { "x" },
+        options = { desc = "Copy relative file path and line range" },
+    },
+
     -- Allow movement through wrapped lines, but only when no count is given
     {
         key = "j",
