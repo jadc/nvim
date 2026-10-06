@@ -17,6 +17,8 @@ require("dropbar").setup({
                 not vim.api.nvim_buf_is_valid(buf)
                 or not vim.api.nvim_win_is_valid(win)
                 or vim.fn.win_gettype(win) ~= ""
+                or vim.t[vim.api.nvim_win_get_tabpage(win)].diffview_hide_ui
+                or vim.wo[win].diff
                 or vim.wo[win].winbar ~= ""
                 or vim.bo[buf].ft == "help"
             then
