@@ -30,7 +30,7 @@
                 pkgs.gnumake
                 pkgs.ripgrep
                 pkgs.tree-sitter
-                pkgs.dotnet-sdk
+                pkgs.dotnet-sdk_10
                 pkgs.wl-clipboard
                 pkgs.xclip
 
