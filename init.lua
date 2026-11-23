@@ -22,6 +22,7 @@ require("plugins.fidget")
 
 -- Defaults
 require("options")
+require("clipboard")
 require("mappings")
 require("lsp")
 require("autocmds")
